@@ -16,7 +16,7 @@ pd.set_option('display.max_columns', None)
 #Ruta Actual
 ruta=os.getcwd()
 #Se declaran variables
-file_path='DataSet1.csv'   
+file_path='DataSet_1.csv'   
 df_contrapeso=pd.read_csv(ruta+"/" + file_path, sep=';')
 #Para activar desactivar pandas profiling (0/1)
 pd_profiling=0 
