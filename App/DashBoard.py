@@ -353,9 +353,7 @@ def lectura (pathFile):
 
     
     #Renombramos Columnas
-    if 'PLCPostPgm|-|AXES[2].DG_ACTUAL_VALUE' in df_contrapeso.columns:
-        df_contrapeso.rename(columns={'PLCPostPgm|-|AXES[2].DG_ACTUAL_VALUE':'Posicion Z','PLCPostPgm|-|AXES[1].DG_ACTUAL_VALUE':'Posicion Y','PLCPostPgm|-|DG_V_MOTOR_POWER':'Z Motor Power Percent', 'PLCPostPgm|-|WG_COUNTERWEIGHTPRESSURE':'Presion Contrapeso'}, inplace=True)
-
+   
     if 'Axis_Z_positionActualMCS_mm_d10000' in df_contrapeso.columns:
         df_contrapeso.rename(columns={'Cnc_Program_Name_RT':'Program Name','Axis_Z_positionActualMCS_mm_d10000':'Posicion Z','Axis_Y_positionActualMCS_mm_d10000':'Posicion Y','Axis_Y_power_percent':'Y Motor Power Percent','Axis_Z_power_percent':'Z Motor Power Percent', 'System_IOLINK_CounterweightPressure':'Presion Contrapeso','System_IOLINK_HydraulicPressure': 'Presion Hidraulica','System_isHydraulicsOn':'Hidraulics ON' }, inplace=True)
 
@@ -493,7 +491,7 @@ def machine_learning(df_contrapeso):
     from sklearn.ensemble import GradientBoostingClassifier
     print("Machine Learning")
 
-    df_contrapeso_trainning= pd.read_csv("files/trainning/trainningSet.csv", sep=';')
+    df_contrapeso_trainning= pd.read_csv("data/DataSet_1.csv", sep=';')
 
     #X=df_contrapeso.loc[:,['Posicion Z', 'Z Motor Power Percent', 'Presion Contrapeso','Presion Hidraulica', 'Hidraulics ON']]
     X=df_contrapeso_trainning[['Posicion Z','Posicion Y', 'Z Motor Power Percent', 'Presion Contrapeso','Presion Hidraulica', 'Hidraulics ON']]
