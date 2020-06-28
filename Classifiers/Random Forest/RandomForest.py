@@ -10,21 +10,19 @@ from sklearn.metrics import accuracy_score
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
+import os
 
 cmap_bold = ListedColormap(['#00FF00', '#FF8000','#FF0000'])
 
 grid_search= "no"
 escalado="no"
 
-file_name_trainning="Pruebas_Trainning_Dataset_3Estados_0SHORT.csv"
-#"Dia17_0950a0957.csv"
-#'Dia17_22a24.csv'
-file_name_prediction=  "Dia17_0950a0957.csv"
+file_name_trainning="DataSet1.csv"
+file_name_prediction=  "Dia17.csv"
 
-path_trainning="G:/OneDrive/V1/data/Trainning/"
-path_prediction="G:/OneDrive/V1/data/Prediction/"
+ruta=os.getcwd()
 
-df=pd.read_csv(path_trainning + file_name_trainning, sep=';')
+df=pd.read_csv(ruta+"/"  + file_name_trainning, sep=';')
 
 print(df.describe())
 
@@ -205,7 +203,7 @@ ax.set_ylabel("Potencia Z")
 #########################################
 
 #Lectura de CSV a predecir
-data=pd.read_csv(path_prediction + file_name_prediction, sep=',')
+data=pd.read_csv(ruta+"/"  + file_name_prediction, sep=',')
 
 #Renombramos las columnas
 if 'PLCPostPgm|-|AXES[2].DG_ACTUAL_VALUE' in data.columns:

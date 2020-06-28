@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 import numpy as np
-
+import os 
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import accuracy_score
-
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.ensemble import GradientBoostingClassifier
-
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
@@ -18,31 +16,27 @@ pd.set_option('display.max_columns', None)
 
 cmap_bold = ListedColormap(['#00FF00', '#FF8000','#FF0000'])
 
+#Selector de acciones de ajuste de hiperparaemtros y escalado (si/no)
 grid_search="no"
 escalado="no"
 
-file_name_trainning="Pruebas_Trainning_Dataset_3Estados_0SHORT.csv"
+#Declaramos datos entrenamiento y a predecir
+file_name_trainning="DataSet1.csv"
+file_name_prediction="Dia17.csv"
 
-
-file_name_prediction="Dia17_0950a0957.csv"
-
-path_trainning="G:/OneDrive/V1/data/Trainning/"
-path_prediction="G:/OneDrive/V1/data/Prediction/"
+#Ruta Actual
+ruta=os.getcwd()
 
 #Lectura de CSV a predecir
-data=pd.read_csv(path_prediction + file_name_prediction, sep=',')
+data=pd.read_csv(ruta+"/"+ file_name_prediction, sep=',')
 #Renombramos las columnas
 if 'Axis_Z_positionActualMCS_mm_d10000' in data.columns:
     data.rename(columns={'Cnc_Program_Name_RT':'Program Name', 'Cnc_Tool_Number_RT': 'N Herramienta', 'Cnc_Override_Axis':'Override Ejes','Axis_Z_positionActualMCS_mm_d10000':'Posicion Z','Axis_Y_positionActualMCS_mm_d10000':'Posicion Y','Axis_Y_power_percent':'Z Motor Power Percent','Axis_Z_power_percent':'Y Motor Power Percent', 'System_IOLINK_CounterweightPressure':'Presion Contrapeso','System_IOLINK_HydraulicPressure': 'Presion Hidraulica','System_isHydraulicsOn':'Hidraulics ON', 'Axis_FeedRate_actual':'FeedRate Actual' }, inplace=True)
 
 
-df=pd.read_csv(path_trainning + file_name_trainning, sep=';')
+df=pd.read_csv(ruta+"/"+ file_name_trainning, sep=';')
 
 print(df.columns)
-
-if 'PLCPostPgm|-|AXES[2].DG_ACTUAL_VALUE' in df.columns:
-    df.rename(columns={'PLCPostPgm|-|AXES[2].DG_ACTUAL_VALUE':'Posicion Z','PLCPostPgm|-|AXES[1].DG_ACTUAL_VALUE':'Posicion Y','PLCPostPgm|-|DG_V_MOTOR_POWER':'Z Motor Power Percent', 'PLCPostPgm|-|WG_COUNTERWEIGHTPRESSURE':'Presion Contrapeso'}, inplace=True)
-
 
 if 'Axis_Z_positionActualMCS_mm_d10000' in df.columns:
     df.rename(columns={'Cnc_Program_Name_RT':'Program Name', 'Cnc_Tool_Number_RT': 'N Herramienta', 'Cnc_Override_Axis':'Override Ejes','Axis_Z_positionActualMCS_mm_d10000':'Posicion Z','Axis_Y_positionActualMCS_mm_d10000':'Posicion Y','Axis_Y_power_percent':'Z Motor Power Percent','Axis_Z_power_percent':'Y Motor Power Percent', 'System_IOLINK_CounterweightPressure':'Presion Contrapeso','System_IOLINK_HydraulicPressure': 'Presion Hidraulica','System_isHydraulicsOn':'Hidraulics ON' }, inplace=True)

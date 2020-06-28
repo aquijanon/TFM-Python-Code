@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
-
+import os
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
@@ -12,19 +12,14 @@ cmap_bold = ListedColormap(['#00FF00', '#FF8000','#FF0000'])
 
 grid_search = "no"
 
-path_training="G:/OneDrive/V1/data/Trainning/"
-path_prediction="G:/OneDrive/V1/data/Prediction/"
+#Ruta Actual
+ruta=os.getcwd()
 
-
-file_name_training="Pruebas_Trainning_Dataset_3Estados_0SHORT.csv"
-file_name_prediction="Dia17_0950a0957.csv"
+file_name_training="DataSet1.csv"
+file_name_prediction="Dia17.csv"
 
 #Z son nuestros datos e Y es el Target
-df=pd.read_csv(path_training + file_name_training, sep=';')
-
-if 'PLCPostPgm|-|AXES[2].DG_ACTUAL_VALUE' in df.columns:
-    df.rename(columns={'PLCPostPgm|-|AXES[2].DG_ACTUAL_VALUE':'Posicion Z','PLCPostPgm|-|AXES[1].DG_ACTUAL_VALUE':'Posicion Y','PLCPostPgm|-|DG_V_MOTOR_POWER':'Z Motor Power Percent', 'PLCPostPgm|-|WG_COUNTERWEIGHTPRESSURE':'Presion Contrapeso'}, inplace=True)
-
+df=pd.read_csv(ruta+"/"+ file_name_training, sep=';')
 
 if 'Axis_Z_positionActualMCS_mm_d10000' in df.columns:
                 df.rename(columns={'Axis_FeedRate_actual':'FeedRate Actual','Cnc_Program_Name_RT':'Program Name', 'Cnc_Tool_Number_RT': 'N Herramienta', 'Cnc_Override_Axis':'Override Ejes','Axis_Z_positionActualMCS_mm_d10000':'Posicion Z','Axis_Y_positionActualMCS_mm_d10000':'Posicion Y','Axis_Y_power_percent':'Z Motor Power Percent','Axis_Z_power_percent':'Y Motor Power Percent', 'System_IOLINK_CounterweightPressure':'Presion Contrapeso','System_IOLINK_HydraulicPressure': 'Presion Hidraulica','System_isHydraulicsOn':'Hidraulics ON' }, inplace=True)
@@ -33,9 +28,6 @@ if 'Axis_Z_positionActualMCS_mm_d10000' in df.columns:
 ######################################################################################################
 #CUIDADO PUEDE NO HACER FALTA HACER LA SIGUIETNE CONVEVERSION DEPENDIENDO LOS DATOS QUE SE USEN
 #######################################################################################################
-
-
-
 df["Posicion Z"]=df["Posicion Z"]/1000
 df["Posicion Y"]=df["Posicion Y"]/1000
 
@@ -175,7 +167,7 @@ plt.show()
 
 
 #Lectura de CSV a predecir 
-data=pd.read_csv(path_prediction + file_name_prediction, sep=',')
+data=pd.read_csv(ruta+"/"+ file_name_prediction, sep=',')
 #Renombramos las columnas
 
 if 'Axis_Z_positionActualMCS_mm_d10000' in data.columns:

@@ -11,26 +11,24 @@ from sklearn.preprocessing import MinMaxScaler
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
-
+import os
 
 cmap_bold = ListedColormap(['#00FF00', '#FF8000','#FF0000'])
 
 #Z son nuestros datos e Y es el Target
 
-
 escalado="no"
 grid_search="no"
 
 
-file_name_trainning="Pruebas_Trainning_Dataset_3Estados_0SHORT.csv"
-file_name_prediction="Dia17_0950a0957.csv"
+#Ruta Actual
+ruta=os.getcwd()
 
-path_trainning="G:/OneDrive/V1/data/Trainning/"
-path_prediction="G:/OneDrive/V1/data/Prediction/"
+file_name_trainning="DataSet1.csv"
+file_name_prediction="Dia17.csv"
 
+df=pd.read_csv(ruta+"/" + file_name_trainning, sep=';')
 
-
-df=pd.read_csv(path_trainning + file_name_trainning, sep=';')
 
 print(df.columns)
 
@@ -179,7 +177,7 @@ if escalado == "no":
 ###############################
 
 #Lectura de CSV a predecir
-data=pd.read_csv(path_prediction + file_name_prediction, sep=',')
+data=pd.read_csv(ruta+"/" + file_name_prediction, sep=',')
 
 #Renombramos las columnas
 

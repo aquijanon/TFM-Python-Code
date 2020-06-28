@@ -23,14 +23,12 @@ grid_search="no"
 
 escalado="no"
 
-file_name_trainning="Pruebas_Trainning_Dataset_3Estados_0SHORT.csv"
-file_name_prediction="Dia17 _0857a0906.csv"
-
-path_trainning="G:/OneDrive/V1/data/Trainning/"
-path_prediction="G:/OneDrive/V1/data/Prediction/"
+file_name_trainning="DataSet1.csv"
+file_name_prediction="Dia17.csv"
+ruta=os.getcwd()
 
 
-df=pd.read_csv(path_trainning + file_name_trainning, sep=';')
+df=pd.read_csv(ruta+"/"  + file_name_trainning, sep=';')
 
 print(df.columns)
 
@@ -192,7 +190,7 @@ plt.show()
 ###############################
 
 #Lectura de CSV a predecir
-data=pd.read_csv(path_prediction + file_name_prediction, sep=',')
+data=pd.read_csv(ruta+"/" + file_name_prediction, sep=',')
 
 #Renombramos las columnas
 if 'PLCPostPgm|-|AXES[2].DG_ACTUAL_VALUE' in data.columns:
